@@ -2,6 +2,8 @@ FROM php:7.2-apache
 COPY ./php/php.ini /usr/local/etc/php/
 COPY ./apache/*.conf /etc/apache2/sites-enabled/
 
+RUN  a2enmod rewrite
+
 RUN apt-get update \
   && apt-get install -y zlib1g-dev libpq-dev mariadb-client unzip\
   && docker-php-ext-install zip pdo_mysql mysqli \
