@@ -1,0 +1,11 @@
+@extends('layout/layout')
+@section('content')
+<h1>よくある質問（FAQ）</h1>
+<ul>
+  <li>項目1</li>
+  <li>項目2</li>
+  <li>項目3</li>
+  <li>項目4</li>
+  <li>項目5</li>
+</ul>
+@stop
