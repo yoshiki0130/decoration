@@ -10,6 +10,66 @@ use Exception;
 class UserController extends Controller
 {
     /**
+     * ログイン処理
+     *
+     * ログインまわりはあとまわし
+     * 
+     * @return \Illuminate\Http\Response
+     */
+    public function login(Request $request)
+    {
+        try {
+            $user_record = User::where('user_id', $request->user_id)
+                ->where('password', $request->password)
+                ->first();
+
+            if (is_null($user_record)) {
+                return redirect()->action('UserController@login')
+                    ->with('message', 'IDかパスパードが間違っています');
+            }
+
+            session([
+                'id' => $user_record->id,
+                'name' => $user_record->name1 . $user_record->name2
+            ]);
+
+            return redirect('user/my');
+        } catch (Exception $e) {
+            dump($e);
+            return;
+        }
+    }
+
+    /**
+     * パスワード再発行
+     * 
+     * ログインまわりはあとまわし
+     */
+    public function reissue(Request $request)
+    {
+        try {
+            // $user_record = User::where('email', $request->email)
+            //     ->first();
+
+            // if (is_null($user_record)) {
+            //     return redirect('/user/reissue')
+            //         ->with('message', '登録したメールアドレスを入力してください。');
+            // }
+
+            // パスワード生成
+            $use_word = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ';
+            $new_pass = substr(str_shuffle($use_word), 0, 8);
+            echo $new_pass;
+            // メール送信処理
+
+            return view('user/reissue_done');
+        } catch (Exception $e) {
+            dump($e);
+            return;
+        }
+    }
+
+    /**
      * 新規登録トップ
      *
      * @return \Illuminate\Http\Response
@@ -29,6 +89,28 @@ class UserController extends Controller
     }
 
     /**
+     * 登録情報変更
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function edit()
+    {
+        try {
+            $user_record = User::where('id', session('id'))->first();
+            $prefectures = Prefecture::all();
+
+            return view('user/mydata')->with([
+                'record' => $user_record,
+                'prefectures' => $prefectures
+            ]);
+        } catch (Exception $e) {
+            dump($e);
+            return;
+        }
+    }
+
+    /**
      * 新規登録確認
      * 
      */
@@ -36,6 +118,26 @@ class UserController extends Controller
     {
         $input = $request->all();
         return view('user/confirm')->with('input', $input);
+    }
+
+    /**
+     * 変更確認
+     *
+     * TODO:ビュー含めて新規登録とまとめたい
+     * 
+     */
+    public function confirmEdit(Request $request)
+    {
+        $input = $request->all();
+        try {
+            $prefecture_data = Prefecture::where('id', $input['prefecture'])->first();
+            $input['prefecture_name'] = $prefecture_data['name'];
+
+            return view('user/confirm_edit')->with('input', $input);
+        } catch (Exception $e) {
+            dump($e);
+            return;
+        }
     }
 
     /**
@@ -65,103 +167,6 @@ class UserController extends Controller
             // エラーログ吐き出す
             dump($e);
             // return view('user/store');
-            return;
-        }
-    }
-
-    /**
-     * ログイン処理
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function login(Request $request)
-    {
-        try {
-            $user_record = User::where('user_id', $request->user_id)
-                ->where('password', $request->password)
-                ->first();
-
-            if (is_null($user_record)) {
-                return redirect()->action('UserController@login')
-                    ->with('message', 'IDかパスパードが間違っています');
-            }
-
-            session([
-                'id' => $user_record->id,
-                'name' => $user_record->name1 . $user_record->name2
-            ]);
-
-            return redirect('user/my');
-        } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-    }
-
-    /**
-     * パスワード再発行
-     */
-    public function reissue(Request $request)
-    {
-        try {
-            // $user_record = User::where('email', $request->email)
-            //     ->first();
-
-            // if (is_null($user_record)) {
-            //     return redirect('/user/reissue')
-            //         ->with('message', '登録したメールアドレスを入力してください。');
-            // }
-
-            // パスワード生成
-            $use_word = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLNMOPQRSTUVWXYZ';
-            $new_pass = substr(str_shuffle($use_word), 0, 8);
-            echo $new_pass;
-            // メール送信処理
-
-            return view('user/reissue_done');
-        } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-    }
-
-    /**
-     * 登録情報変更
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-
-        try {
-            $user_record = User::where('id', session('id'))->first();
-            $prefectures = Prefecture::all();
-
-            return view('user/mydata')->with([
-                'record' => $user_record,
-                'prefectures' => $prefectures
-            ]);
-        } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-    }
-
-    /**
-     * 変更確認
-     *
-     */
-    public function confirmEdit(Request $request)
-    {
-        $input = $request->all();
-        try {
-            $prefecture_data = Prefecture::where('id', $input['prefecture'])->first();
-            $input['prefecture_name'] = $prefecture_data['name'];
-
-            return view('user/confirm_edit')->with('input', $input);
-        } catch (Exception $e) {
-            dump($e);
             return;
         }
     }

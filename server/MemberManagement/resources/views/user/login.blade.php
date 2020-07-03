@@ -22,7 +22,7 @@
     <button type="submit" class="btn btn-primary">ログイン</button>
   </form>
   <p>
-    <a href="/user/reissue">パスワードを忘れてしまった</a>
+    {{--  <a href="/user/reissue">パスワードを忘れてしまった</a>  --}}
   </p>
   <hr>
   <br>
