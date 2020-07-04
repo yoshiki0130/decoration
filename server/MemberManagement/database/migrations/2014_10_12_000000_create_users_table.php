@@ -25,7 +25,7 @@ class CreateUsersTable extends Migration
             $table->integer('gender');
             $table->integer('prefecture');
             $table->timestamps();
-            $table->softDeletes()
+            $table->softDeletes();
         });
     }
 
