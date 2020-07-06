@@ -25,9 +25,9 @@ Route::post('/user/edit/done', 'UserController@update');
 Route::view('/user/unscribe', 'user/unscribe');
 Route::get('/user/unscribe/done', 'UserController@delete');
 // お問い合わせ
-Route::view('/user/contact', 'user/contact');
-Route::view('/user/contact/confirm', 'user/confirmContact');
-Route::view('/user/contact/done', 'user/sendContact');
+Route::view('/user/contact', 'contact/top');
+Route::post('/user/contact/confirm', 'ContactController@confirm');
+Route::post('/user/contact/done', 'ContactController@send');
 // クーポン一覧
 Route::get('/user/coupon', 'CouponController@list');
 // FAQ
