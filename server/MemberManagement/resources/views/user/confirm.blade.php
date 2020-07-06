@@ -58,7 +58,7 @@
       <tr>
         <th>住所</th>
         <td>
-          {{ $input['prefecture'] }}
+          {{ $input['prefecture_name'] }}
           <input type="hidden" name="prefecture" value="{{ $input['prefecture'] }}">
         </td>
       </tr>
