@@ -117,7 +117,16 @@ class UserController extends Controller
     public function confirm(Request $request)
     {
         $input = $request->all();
-        return view('user/confirm')->with('input', $input);
+        try {
+            $prefecture_data = Prefecture::where('id', $input['prefecture'])->first();
+            $input['prefecture_name'] = $prefecture_data['name'];
+
+            return view('user/confirm')->with('input', $input);
+        } catch (Exception $e) {
+            dump($e);
+            return;
+        }
+
     }
 
     /**
@@ -219,6 +228,7 @@ class UserController extends Controller
             session()->flush();
             return view('user/unscribe_done');
         } catch (Exception $e) {
+            session()->flush();
             dump($e);
             return;
         }
