@@ -29,7 +29,7 @@ Route::view('/user/contact', 'user/contact');
 Route::view('/user/contact/confirm', 'user/confirmContact');
 Route::view('/user/contact/done', 'user/sendContact');
 // クーポン一覧
-Route::get('/user/coupon', 'UserController@coupon');
+Route::get('/user/coupon', 'CouponController@list');
 // FAQ
 Route::view('/user/faq', 'user/faq');
 // パスワード再発行
