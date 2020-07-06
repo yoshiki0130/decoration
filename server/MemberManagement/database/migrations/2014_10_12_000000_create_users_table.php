@@ -20,10 +20,12 @@ class CreateUsersTable extends Migration
             $table->string('name2');
             $table->string('yomi1');
             $table->string('yomi2');
-            $table->string('email');
             $table->string('password');
+            $table->string('email');
             $table->integer('gender');
+            $table->integer('prefecture');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
