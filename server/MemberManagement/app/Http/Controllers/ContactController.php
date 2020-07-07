@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Contact;
 use Exception;
 
 
@@ -20,10 +19,8 @@ class ContactController extends Controller
     {
 
         try {
-            $content = new Contact;
-            $content->content = $request->content;
-            $content->save();
-
+            // 店舗メールにお問い合わせ内容をメール
+            // $request->content;
             return view('contact/done');
         } catch (Exception $e) {
             // エラーページ表示
