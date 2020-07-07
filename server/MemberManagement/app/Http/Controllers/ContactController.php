@@ -20,7 +20,8 @@ class ContactController extends Controller
 
         try {
             // 店舗メールにお問い合わせ内容をメール
-            // $request->content;
+            // 参考：
+            // https://qiita.com/sayama0402/items/dd10cdb2aa22c8a035b3
             return view('contact/done');
         } catch (Exception $e) {
             // エラーページ表示
