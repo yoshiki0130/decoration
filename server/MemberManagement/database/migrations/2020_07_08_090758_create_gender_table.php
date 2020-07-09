@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddContentToCouponTable extends Migration
+class CreateGenderTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,9 @@ class AddContentToCouponTable extends Migration
      */
     public function up()
     {
-        Schema::table('coupons', function (Blueprint $table) {
-            $table->string('content');
+        Schema::create('genders', function (Blueprint $table) {
+            $table->increments('gender_id');
+            $table->string('name');
         });
     }
 
@@ -25,8 +26,6 @@ class AddContentToCouponTable extends Migration
      */
     public function down()
     {
-        Schema::table('coupons', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('genders');
     }
 }

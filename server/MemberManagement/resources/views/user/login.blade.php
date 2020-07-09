@@ -27,7 +27,7 @@
   <hr>
   <br>
   <p>
-    <a href="/user/create" class="btn btn-success">新規会員登録</a>
+    <a href="/user/create/registration" class="btn btn-success">新規会員登録</a>
   </p>
 </div>
 @stop

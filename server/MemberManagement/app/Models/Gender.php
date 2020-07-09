@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prefecture extends Model
+class Gender extends Model
 {
     public $timestamps = false;
-    protected $primaryKey = "prefecture_id";
+    protected $primaryKey = "gender_id";
 
     public function user()
     {

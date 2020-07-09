@@ -15,10 +15,10 @@
 
 <body>
   <header style="background: #dee">
-    ヘッダー
     <p>
+    <a href="/">トップ</a>　
     @if (Session::has('name'))
-      {{ session('name') }}さん
+      {{ session('name') }}さん　<a href="/logout">ログアウト</a>
     @else
       <a href="/login">ログイン</a>
     @endif

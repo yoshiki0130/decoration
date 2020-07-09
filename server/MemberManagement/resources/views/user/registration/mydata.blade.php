@@ -55,14 +55,13 @@
       </tr>
       <tr>
         <th>住所</th>
-        {{-- あとでDBから取る形にする --}}
         <td>
           <select name="prefecture" id="">
             @foreach ($prefectures as $item)
-              @if ($item['id'] === $record['prefecture'])
-              <option value="{{ $item['id'] }}" selected>{{ $item['name'] }}</option>
+              @if ($item['prefecture_id'] === $record['prefecture'])
+              <option value="{{ $item['prefecture_id'] }}" selected>{{ $item['name'] }}</option>
               @else
-              <option value="{{ $item['id'] }}">{{ $item['name'] }}</option>
+              <option value="{{ $item['prefecture_id'] }}">{{ $item['name'] }}</option>
               @endif
             @endforeach
             </select>
