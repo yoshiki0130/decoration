@@ -77,14 +77,14 @@
       <tr>
         <th>性別</th>
         <td>
-@foreach ($genders as $item)
+@foreach ($genders as $gender)
           <label>
-  @if (isset($record) && $item['gender_id'] === $record['gender_id'])
-            <input type="radio" name="gender_id" value="{{ $item['gender_id'] }}" checked>
-            {{ $item['name'] }}
+  @if (isset($record) && $gender['id'] === $record['gender_id'])
+            <input type="radio" name="gender_id" value="{{ $gender['id'] }}" checked>
+            {{ $gender['name'] }}
   @else
-            <input type="radio" name="gender_id" value="{{ $item['gender_id'] }}">
-            {{ $item['name'] }}
+            <input type="radio" name="gender_id" value="{{ $gender['id'] }}">
+            {{ $gender['name'] }}
   @endif
           </label>
 @endforeach
@@ -95,11 +95,11 @@
         <td>
           <select name="prefecture_id">
             <option value="" selected>都道府県</option>
-@foreach ($prefectures as $item)
-  @if (isset($record) && $item['prefecture_id'] === $record['prefecture_id'])
-            <option value="{{ $item['prefecture_id'] }}" selected>{{ $item['name'] }}</option>
+@foreach ($prefectures as $prefecture)
+  @if (isset($record) && $prefecture['id'] === $record['prefecture_id'])
+            <option value="{{ $prefecture['id'] }}" selected>{{ $prefecture['name'] }}</option>
   @else
-            <option value="{{ $item['prefecture_id'] }}">{{ $item['name'] }}</option>
+            <option value="{{ $prefecture['id'] }}">{{ $prefecture['name'] }}</option>
   @endif
 @endforeach
           </select>

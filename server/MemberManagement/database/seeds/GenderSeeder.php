@@ -12,8 +12,8 @@ class GenderSeeder extends Seeder
     public function run()
     {
         DB::table('genders')->insert([
-            ['gender_id' => 1, 'name' => '男'],
-            ['gender_id' => 2, 'name' => '女'],
+            ['id' => 1, 'name' => '男'],
+            ['id' => 2, 'name' => '女'],
         ]);
     }
 }

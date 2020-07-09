@@ -7,9 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 class Prefecture extends Model
 {
     public $timestamps = false;
-    protected $primaryKey = "prefecture_id";
 
-    public function user()
+    public function users()
     {
         return $this->hasMany('App\Models\User');
     }

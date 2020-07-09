@@ -118,8 +118,8 @@ class UserController extends Controller
     {
         $input = $request->all();
         try {
-            $prefecture_data = Prefecture::where('prefecture_id', $input['prefecture_id'])->first();
-            $gender_data = Gender::where('gender_id', $input['gender_id'])->first();
+            $prefecture_data = Prefecture::where('id', $input['prefecture_id'])->first();
+            $gender_data = Gender::where('id', $input['gender_id'])->first();
             $input['prefecture_name'] = $prefecture_data['name'];
             $input['gender_name'] = $gender_data['name'];
 

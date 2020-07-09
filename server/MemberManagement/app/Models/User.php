@@ -10,4 +10,9 @@ class User extends Model
     {
         return $this->belongsTo('App\Models\Prefecture');
     }
+
+    public function gender()
+    {
+        return $this->belongsTo('App\Models\Gender');
+    }
 }
