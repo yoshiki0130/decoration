@@ -13,7 +13,9 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('prefectures')->truncate();
         DB::table('genders')->truncate();
+        DB::table('users')->truncate();
         $this->call(PrefectureSeeder::class);
         $this->call(GenderSeeder::class);
+        $this->call(UserTableSeeder::class);
     }
 }
