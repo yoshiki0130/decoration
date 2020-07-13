@@ -2,7 +2,7 @@ version: '3'
 
 services:
   web:
-    container_name: web
+    container_name: member_management_web
     build: ./docker
     ports:
       - 9010:80
@@ -12,7 +12,7 @@ services:
 
   db:
     image: mysql:5.7
-    container_name: db-host
+    container_name: member_management_db-host
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: docker-database
@@ -28,7 +28,7 @@ services:
       - 9013:3306
 
   phpmyadmin:
-    container_name: phpmyadmin
+    container_name: member_management_phpmyadmin
     image: phpmyadmin/phpmyadmin
     environment:
       - PMA_ARBITRARY=1
