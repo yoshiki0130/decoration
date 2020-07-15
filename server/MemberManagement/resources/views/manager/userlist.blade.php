@@ -61,7 +61,11 @@
     </tr>
     @foreach ($userlist as $user)
     <tr>
-      <td>{{ $user['name1'] . $user['name2'] }}</td>
+      <td>
+        <a href="/manager/userdetail/{{ $user['id'] }}">
+          {{ $user['name1'] . $user['name2'] }}
+        </a>
+      </td>
       <td>{{ $user['gender_name'] }}</td>
       <td>{{ $user['prefecture_name'] }}</td>
       <td>{{ date('Y/m/d', strtotime($user['created_at'])) }}</td>

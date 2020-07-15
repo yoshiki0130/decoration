@@ -54,4 +54,14 @@ class ManagerController extends Controller
             return;
         }
     }
+
+    public function userdetail($id)
+    {
+        $user = User::find($id);
+
+        $user['gender_name'] = $user->gender->name;
+        $user['prefecture_name'] = $user->prefecture->name;
+
+        return view('manager/userdetail')->with('user', $user);
+    }
 }
