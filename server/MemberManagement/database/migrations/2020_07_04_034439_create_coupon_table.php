@@ -20,6 +20,12 @@ class CreateCouponTable extends Migration
             $table->timestamps();
             $table->softDeletes();
         });
+
+        Schema::create('coupon_user', function (Blueprint $table) {
+            $table->integer('coupon_id');
+            $table->integer('user_id');
+            $table->softDeletes();
+        });
     }
 
     /**
