@@ -15,14 +15,7 @@
 
 <body>
   <header style="background: #dee">
-    <p>
-    <a href="/">トップ</a>　
-    @if (Session::has('name'))
-      {{ session('name') }}さん　<a href="/logout">ログアウト</a>
-    @else
-      <a href="/login">ログイン</a>
-    @endif
-    </p>
+    管理用ヘッダー
   </header>
 
   <div class="container">
@@ -30,7 +23,7 @@
   </div>
 
   <footer style="background: #dee">
-    フッター
+    管理用フッター
   </footer>
 </body>
 

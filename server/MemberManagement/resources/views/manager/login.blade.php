@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/manager')
 @section('content')
 <div>
   <h1>ログイン</h1>
@@ -11,8 +11,8 @@
     {{ csrf_field() }}
     <ul>
       <li>
-        <label for="id">登録したメールアドレス</label>
-        <input type="text" name="email">
+        <label for="id">ID</label>
+        <input type="text" name="admin_id">
       </li>
       <li>
         <label for="pass">パスワード</label>
@@ -21,13 +21,5 @@
     </ul>
     <button type="submit" class="btn btn-primary">ログイン</button>
   </form>
-  <p>
-    {{--  <a href="/user/reissue">パスワードを忘れてしまった</a>  --}}
-  </p>
-  <hr>
-  <br>
-  <p>
-    <a href="/user/create/registration" class="btn btn-success">新規会員登録</a>
-  </p>
 </div>
 @stop

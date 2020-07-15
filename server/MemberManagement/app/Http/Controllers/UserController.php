@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prefecture;
+use App\Models\Gender;
 use Exception;
 
 class UserController extends Controller
@@ -19,7 +20,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         try {
-            $user_record = User::where('user_id', $request->user_id)
+            $user_record = User::where('email', $request->email)
                 ->where('password', $request->password)
                 ->first();
 
@@ -38,6 +39,13 @@ class UserController extends Controller
             dump($e);
             return;
         }
+    }
+
+    public function logout()
+    {
+        session()->flush();
+
+        return view('auth/logout');
     }
 
     /**
@@ -70,139 +78,93 @@ class UserController extends Controller
     }
 
     /**
-     * 新規登録トップ
+     * 登録・変更トップ
      *
-     * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function registration($mode)
     {
         try {
             $prefectures = Prefecture::all();
-            return view('user/create')->with('prefectures', $prefectures);
-        } catch (Exception $e) {
-            // エラーページ表示
-            // エラーログ吐き出す
-            dump($e);
-            return;
-            // return view('user/store');
-        }
-    }
+            $genders = Gender::all();
 
-    /**
-     * 登録情報変更
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit()
-    {
-        try {
-            $user_record = User::where('id', session('id'))->first();
-            $prefectures = Prefecture::all();
+            if ($mode === 'edit') {
+                $user_record = User::where('id', session('id'))->first();
 
-            return view('user/mydata')->with([
-                'record' => $user_record,
+                return view('user/registration/input')->with([
+                    'record' => $user_record,
+                    'genders' => $genders,
+                    'prefectures' => $prefectures
+                ]);
+            }
+                
+            return view('user/registration/input')->with([
+                'genders' => $genders,
                 'prefectures' => $prefectures
             ]);
         } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-    }
-
-    /**
-     * 新規登録確認
-     * 
-     */
-    public function confirm(Request $request)
-    {
-        $input = $request->all();
-        try {
-            $prefecture_data = Prefecture::where('id', $input['prefecture'])->first();
-            $input['prefecture_name'] = $prefecture_data['name'];
-
-            return view('user/confirm')->with('input', $input);
-        } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-
-    }
-
-    /**
-     * 変更確認
-     *
-     * TODO:ビュー含めて新規登録とまとめたい
-     * 
-     */
-    public function confirmEdit(Request $request)
-    {
-        $input = $request->all();
-        try {
-            $prefecture_data = Prefecture::where('id', $input['prefecture'])->first();
-            $input['prefecture_name'] = $prefecture_data['name'];
-
-            return view('user/confirm_edit')->with('input', $input);
-        } catch (Exception $e) {
-            dump($e);
-            return;
-        }
-    }
-
-    /**
-     * 新規登録実行
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        try {
-            $user = new User;
-            $user->user_id = $request->user_id;
-            $user->name1 = $request->name1;
-            $user->name2 = $request->name2;
-            $user->yomi1 = $request->yomi1;
-            $user->yomi2 = $request->yomi2;
-            $user->password = $request->password;
-            $user->email = $request->email;
-            $user->gender = $request->gender;
-            $user->prefecture = $request->prefecture;
-            $user->save();
-
-            return view('user/store');
-        } catch (Exception $e) {
             // エラーページ表示
             // エラーログ吐き出す
             dump($e);
+            return;
             // return view('user/store');
+        }
+    }
+
+    /**
+     * 登録・変更確認
+     * 
+     */
+    public function confirm(Request $request, $mode)
+    {
+        $input = $request->all();
+        try {
+            $prefecture_data = Prefecture::where('id', $input['prefecture_id'])->first();
+            $gender_data = Gender::where('id', $input['gender_id'])->first();
+            $input['prefecture_name'] = $prefecture_data['name'];
+            $input['gender_name'] = $gender_data['name'];
+
+            return view('user/registration/confirm')->with([
+                'input' => $input,
+                'mode' => $mode
+            ]);
+        } catch (Exception $e) {
+            dump($e);
             return;
         }
     }
 
     /**
-     * 変更実行
+     * 登録・変更実行
      *
      */
-    public function update(Request $request)
+    public function store(Request $request, $mode)
     {
         try {
-            $user = User::find(session('id'));
+            if ($mode === 'edit') {
+                $user = User::find(session('id'));
+                session([
+                    'name' => $request->name1 . $request->name2
+                ]);
+            } else {
+                $user = new User;
+            }
+
             $user->user_id = $request->user_id;
             $user->name1 = $request->name1;
             $user->name2 = $request->name2;
-            $user->yomi1 = $request->yomi1;
-            $user->yomi2 = $request->yomi2;
+            $user->kana1 = $request->kana1;
+            $user->kana2 = $request->kana2;
             $user->password = $request->password;
             $user->email = $request->email;
-            $user->gender = $request->gender;
-            $user->prefecture = $request->prefecture;
+            $user->gender_id = $request->gender_id;
+            $user->prefecture_id = $request->prefecture_id;
             $user->save();
 
-            session([
-                'name' => $user->name1 . $user->name2
-            ]);
-            return redirect('user/my')->with('message', '登録情報を変更しました');
+            if ($mode === 'edit') {
+                return redirect('user/my')->with('message', '登録情報を変更しました');
+            } else {
+                return view('user/registration/store');
+            }
         } catch (Exception $e) {
             // エラーページ表示
             // エラーログ吐き出す

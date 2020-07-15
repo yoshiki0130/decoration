@@ -4,11 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Prefecture extends Model
+class Gender extends Model
 {
     public $timestamps = false;
 
-    public function users()
+    public function user()
     {
         return $this->hasMany('App\Models\User');
     }

@@ -6,28 +6,27 @@ use Illuminate\Support\Facades\Route;
  * 会員用ページ
  */
 Route::view('/', 'user/top');
+// ログイン・ログアウトはコントローラ別にしたほうがよさそうだけど仮で作っとく
 // ログイントップ
 Route::view('/login', 'user/login');
 // ログイン処理
 Route::post('/login', 'UserController@login');
-// 新規登録
-Route::get('/user/create', 'UserController@create');
-Route::post('/user/create/confirm', 'UserController@confirm');
-Route::post('/user/create/done', 'UserController@store');
+// ログアウト
+Route::get('/logout', 'UserController@logout');
+// 新規登録・編集
+Route::get('/user/{mode}/registration', 'UserController@registration')->where('mode', 'create|edit');
+Route::post('/user/{mode}/confirm', 'UserController@confirm')->where('mode', 'create|edit');
+Route::post('/user/{mode}/store', 'UserController@store')->where('mode', 'create|edit');
 
 // マイページ
 Route::view('/user/my', 'user/my');
-// 編集
-Route::get('/user/edit', 'UserController@edit');
-Route::post('/user/edit/confirm', 'UserController@confirmEdit');
-Route::post('/user/edit/done', 'UserController@update');
 // 退会（削除）
 Route::view('/user/unscribe', 'user/unscribe');
 Route::get('/user/unscribe/done', 'UserController@delete');
 // お問い合わせ
-Route::view('/user/contact', 'user/contact');
-Route::view('/user/contact/confirm', 'user/confirmContact');
-Route::view('/user/contact/done', 'user/sendContact');
+Route::view('/user/contact', 'contact/top');
+Route::post('/user/contact/confirm', 'ContactController@confirm');
+Route::post('/user/contact/done', 'ContactController@send');
 // クーポン一覧
 Route::get('/user/coupon', 'CouponController@list');
 // FAQ
@@ -43,12 +42,15 @@ Route::post('/user/reissue/done', 'UserController@reissue');
  * 管理者用ページ
  */
 // 管理者用ログイントップ
-Route::get('/manage', 'ManageController@index');
-// ログイン後トップ（機能一覧）後から増える予定で簡素に作る？
-
+Route::view('/manager', 'manager/login');
+// ログイン後トップ（機能一覧）
+// ログイン機能は後で作るか他チームと統合される？
+Route::view('/manager/top', 'manager/top');
 // 会員検索・一覧
+Route::get('/manager/userlist', 'ManagerController@userlist');
+// 会員詳細
+Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('id', '^[0-9]+$');
 
-// 会員詳細（ユーザマイページとviewだけ共通
 
 // 会員情報変更
 
