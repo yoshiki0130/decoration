@@ -48,8 +48,9 @@ Route::view('/manager', 'manager/login');
 Route::view('/manager/top', 'manager/top');
 // 会員検索・一覧
 Route::get('/manager/userlist', 'ManagerController@userlist');
+// 会員詳細
+Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('id', '^[0-9]+$');
 
-// 会員詳細（ユーザマイページとviewだけ共通
 
 // 会員情報変更
 
