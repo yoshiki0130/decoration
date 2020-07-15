@@ -20,7 +20,7 @@ class UserController extends Controller
     public function login(Request $request)
     {
         try {
-            $user_record = User::where('user_id', $request->user_id)
+            $user_record = User::where('email', $request->email)
                 ->where('password', $request->password)
                 ->first();
 
@@ -152,8 +152,8 @@ class UserController extends Controller
             $user->user_id = $request->user_id;
             $user->name1 = $request->name1;
             $user->name2 = $request->name2;
-            $user->yomi1 = $request->yomi1;
-            $user->yomi2 = $request->yomi2;
+            $user->kana1 = $request->kana1;
+            $user->kana2 = $request->kana2;
             $user->password = $request->password;
             $user->email = $request->email;
             $user->gender_id = $request->gender_id;

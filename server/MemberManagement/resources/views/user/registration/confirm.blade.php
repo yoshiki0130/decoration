@@ -21,9 +21,9 @@
        <tr>
         <th>フリガナ</th>
         <td>
-          {{ $input['yomi1'] }} {{ $input['yomi2'] }}
-          <input type="hidden" name="yomi1" value="{{ $input['yomi1'] }}">
-          <input type="hidden" name="yomi2" value="{{ $input['yomi2'] }}">
+          {{ $input['kana1'] }} {{ $input['kana2'] }}
+          <input type="hidden" name="kana1" value="{{ $input['kana1'] }}">
+          <input type="hidden" name="kana2" value="{{ $input['kana2'] }}">
         </td>
       </tr> 
       <tr>

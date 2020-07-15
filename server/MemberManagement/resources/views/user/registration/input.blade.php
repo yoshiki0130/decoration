@@ -29,14 +29,14 @@
       <tr>
         <th>フリガナ</th>
         <td>
-          姓<input type="text" name="yomi1"
-          @if (isset($record['yomi1']))
-              value="{{ $record['yomi1'] }}"
+          姓<input type="text" name="kana1"
+          @if (isset($record['kana1']))
+              value="{{ $record['kana1'] }}"
           @endif
           >
-          名<input type="text" name="yomi2"
-          @if (isset($record['yomi2']))
-              value="{{ $record['yomi2'] }}"
+          名<input type="text" name="kana2"
+          @if (isset($record['kana2']))
+              value="{{ $record['kana2'] }}"
           @endif
           >
         </td>

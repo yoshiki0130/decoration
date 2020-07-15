@@ -2,8 +2,9 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\User;
+use App\Models\User;
 use Faker\Generator as Faker;
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 
 /*
@@ -18,11 +19,23 @@ use Illuminate\Support\Str;
 */
 
 $factory->define(User::class, function (Faker $faker) {
+    $start = Carbon::create("2015", "1", "1");
+    $end = Carbon::create("2020", "12", "31");
+    $min = strtotime($start);
+    $max = strtotime($end);
+    $date = date('Y-m-d H:i:s', rand($min, $max));
+
     return [
-        'name' => $faker->name,
+        'name1' => $faker->lastName,
+        'name2' => $faker->firstName,
+        'kana1' => 'カナ',
+        'kana2' => 'カナ',
+        'gender_id' => random_int(1, 2),
+        'password' => 'test',
         'email' => $faker->unique()->safeEmail,
-        'email_verified_at' => now(),
-        'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password
-        'remember_token' => Str::random(10),
+        'prefecture_id' => random_int(1, 47),
+        'created_at' => $date,
+        'updated_at' => $date,
+        // 'remember_token' => Str::random(10),
     ];
 });

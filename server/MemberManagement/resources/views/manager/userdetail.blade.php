@@ -10,7 +10,7 @@
     </tr>
     <tr>
       <th>フリガナ</th>
-      <td>{{ $user['yomi1'] .' '.$user['yomi2'] }}</td>
+      <td>{{ $user['kana1'] .' '.$user['kana2'] }}</td>
     </tr>
     <tr>
       <th>パスワード</th>

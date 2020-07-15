@@ -11,8 +11,8 @@
     {{ csrf_field() }}
     <ul>
       <li>
-        <label for="id">ID</label>
-        <input type="text" name="user_id">
+        <label for="id">登録したメールアドレス</label>
+        <input type="text" name="email">
       </li>
       <li>
         <label for="pass">パスワード</label>
