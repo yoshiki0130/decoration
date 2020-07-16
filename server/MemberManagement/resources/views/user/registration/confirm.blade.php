@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
 <div>
 @if ($mode === 'edit')

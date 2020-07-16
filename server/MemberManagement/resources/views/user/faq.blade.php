@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
 <h1>よくある質問（FAQ）</h1>
 <ul>
