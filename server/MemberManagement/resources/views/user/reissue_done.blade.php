@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
 <h1>パスワード再発行</h1>
 <div>

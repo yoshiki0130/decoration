@@ -27,8 +27,6 @@ Route::get('/user/unscribe/done', 'UserController@delete');
 Route::view('/user/contact', 'contact/top');
 Route::post('/user/contact/confirm', 'ContactController@confirm');
 Route::post('/user/contact/done', 'ContactController@send');
-// クーポン一覧
-Route::get('/user/coupon', 'CouponController@list');
 // FAQ
 Route::view('/user/faq', 'user/faq');
 // パスワード再発行
@@ -64,8 +62,9 @@ Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('i
 
 // 実行
 
-/* Route::('/', 'UserController@');
-Route::('/', 'UserController@');
-Route::('/', 'UserController@');
-Route::('/', 'UserController@');
-Route::('/', 'UserController@'); */
+// クーポン一覧
+Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manager');
+Route::view('/manager/coupon/registration', 'coupon/input');
+Route::post('/manager/coupon/confirm', 'CouponController@confirm');
+Route::post('/manager/coupon/store', 'CouponController@store');
+

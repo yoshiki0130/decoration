@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
 <div>
   <h1>ログイン</h1>

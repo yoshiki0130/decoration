@@ -1,4 +1,4 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
 <div>
   <h1>お問い合わせ</h1>
