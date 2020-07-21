@@ -6,7 +6,6 @@ use App\Models\Gender;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Prefecture;
-use Exception;
 
 class ManagerController extends Controller
 {

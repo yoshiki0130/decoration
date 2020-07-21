@@ -17,6 +17,11 @@ class User extends Model
         return $this->belongsTo('App\Models\Gender');
     }
 
+    public function coupons()
+    {
+        return $this->belongsToMany('App\Models\Coupon');
+    }
+
     public static function search(Request $request)
     {
         $query = User::query();

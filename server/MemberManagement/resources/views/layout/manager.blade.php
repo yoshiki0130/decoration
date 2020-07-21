@@ -18,7 +18,13 @@
     管理用ヘッダー
   </header>
 
+  {{-- これヘッダ・フッタだけincludeにすればいいのでは --}}
   <div class="container">
+    @if (Session::has('message'))
+    <div class="alert alert-primary" role="alert">
+      {{ session('message') }}
+    </div>
+    @endif
     @yield('content')
   </div>
 

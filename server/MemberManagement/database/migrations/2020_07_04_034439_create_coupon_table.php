@@ -23,9 +23,9 @@ class CreateCouponTable extends Migration
         });
 
         Schema::create('coupon_user', function (Blueprint $table) {
+            $table->id();
             $table->integer('coupon_id');
             $table->integer('user_id');
-            $table->softDeletes();
         });
     }
 
@@ -37,5 +37,6 @@ class CreateCouponTable extends Migration
     public function down()
     {
         Schema::dropIfExists('coupons');
+        Schema::dropIfExists('coupon_user');
     }
 }

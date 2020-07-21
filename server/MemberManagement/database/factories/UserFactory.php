@@ -5,7 +5,6 @@
 use App\Models\User;
 use Faker\Generator as Faker;
 use Carbon\Carbon;
-use Illuminate\Support\Str;
 
 /*
 |--------------------------------------------------------------------------

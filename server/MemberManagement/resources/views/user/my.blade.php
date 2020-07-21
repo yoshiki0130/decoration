@@ -1,11 +1,6 @@
 @extends('layout/user')
 @section('content')
 <div>
-  @if (Session::has('message'))
-      <p>{{ session('message') }}</p>
-  @endif
-</div>
-<div>
   <h1>マイページ</h1>
   <ul>
      <li><a href="/user/coupon">クーポン一覧</a></li> 

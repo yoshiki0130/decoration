@@ -2,11 +2,6 @@
 @section('content')
 <div>
   <h1>ログイン</h1>
-  <div>
-    @if (Session::has('message'))
-        <p>{{ session('message') }}</p>
-    @endif
-  </div>
   <form action="/login" method="post">
     {{ csrf_field() }}
     <ul>

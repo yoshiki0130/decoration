@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Coupon;
-use Exception;
-use PHPUnit\Framework\Constraint\Count;
+use App\Models\User;
 
 class CouponController extends Controller
 {
@@ -14,22 +13,39 @@ class CouponController extends Controller
      */
     public function list($mode)
     {
-        // いずれクーポンとユーザ紐付けテーブル使って管理する
-        $coupon = Coupon::all();
+        if ($mode === 'manager') {
+            $coupon = Coupon::all();
 
-        return view('coupon/list')->with([
+            foreach ($coupon as $item) {
+                $item['distributuion_count'] = count($item->users);
+            }
+        } elseif ($mode === 'user') {
+            $coupon = User::find(session('id'))->coupons;
+        } else {
+            // 
+        }
+
+        return view('coupon/couponlist')->with([
             'mode' => $mode,
             'data' => $coupon,
         ]);
     }
 
+    /**
+     * クーポン作成確認
+     */
     public function confirm(Request $request)
     {
-        $input = $request->all();
-
-        return view('coupon/confirm')->with('input', $input);
+        $searchResult = User::search($request);
+        return view('coupon/confirm')->with([
+            'input'=> $request->all(),
+            'userlist' => $searchResult['userlist'],
+        ]);
     }
 
+    /**
+     * クーポン作成実行
+     */
     public function store(Request $request)
     {
         try {
@@ -38,9 +54,9 @@ class CouponController extends Controller
             $coupon->content = $request->content;
             $coupon->expiration_date = $request->expiration_date;
             $coupon->save();
+            $coupon->users()->sync($request->user_id);
 
             return redirect('/manager/coupon/')->with('message', 'クーポンを新規作成しました');
-            
         } catch (\Throwable $th) {
             dump($th);
             return;

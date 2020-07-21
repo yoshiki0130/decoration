@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Models\Gender;
+use App\Models\Prefecture;
 
 /**
  * 会員用ページ
@@ -49,22 +51,9 @@ Route::get('/manager/userlist', 'ManagerController@userlist');
 // 会員詳細
 Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('id', '^[0-9]+$');
 
-
-// 会員情報変更
-
-// 確認
-
-// 実行
-
-// 会員情報削除
-
-// 確認
-
-// 実行
-
 // クーポン一覧
 Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manager');
-Route::view('/manager/coupon/registration', 'coupon/input');
+// クーポン作成
+Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender::all(), 'prefectures' => Prefecture::all()]);
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');
 Route::post('/manager/coupon/store', 'CouponController@store');
-

@@ -16,16 +16,21 @@
 <body>
   <header style="background: #dee">
     <p>
-    <a href="/">トップ</a>　
-    @if (Session::has('name'))
+      <a href="/">トップ</a>　
+      @if (Session::has('name'))
       {{ session('name') }}さん　<a href="/logout">ログアウト</a>
-    @else
+      @else
       <a href="/login">ログイン</a>
-    @endif
+      @endif
     </p>
   </header>
 
   <div class="container">
+    @if (Session::has('message'))
+    <div class="alert alert-primary" role="alert">
+      {{ session('message') }}
+    </div>
+    @endif
     @yield('content')
   </div>
 

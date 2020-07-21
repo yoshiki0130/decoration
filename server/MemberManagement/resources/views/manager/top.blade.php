@@ -1,11 +1,6 @@
 @extends('layout/manager')
 @section('content')
 <div>
-  @if (Session::has('message'))
-  <p>{{ session('message') }}</p>
-  @endif
-</div>
-<div>
   <h1>機能一覧</h1>
   <ul>
     <li><a href="/manager/userlist">会員検索・一覧</a></li>
