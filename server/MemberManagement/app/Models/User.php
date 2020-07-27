@@ -3,7 +3,10 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
+use App\Models\Gender;
+use App\Models\Prefecture;
 
 class User extends Model
 {
@@ -22,6 +25,11 @@ class User extends Model
         return $this->belongsToMany('App\Models\Coupon');
     }
 
+    /**
+     * 会員検索
+     * 
+     * リクエストそのまま受け取って検索結果配列と検索条件を返す
+     */
     public static function search(Request $request)
     {
         $query = User::query();
@@ -52,5 +60,46 @@ class User extends Model
         }
 
         return compact('userlist', 'searchCriteria');
+    }
+
+    /**
+     * グラフ用
+     * 
+     */
+    public static function getChartData()
+    {
+        $data = [];
+        $data['alluser'] = User::all()->count();
+
+        // このへんのグラフ用値の取得をModelに書くとしたらUserかな
+
+        // 性別ごとの人数→円
+        $data['genders'] = User::select('gender_id', DB::raw('count(gender_id) as user_count'))
+            ->groupBy('gender_id')
+            ->get()
+            ->toArray();
+        // $data['genders'] = array_column($data['genders'], 'user_count', 'gender_id');
+
+        // 住所（都道府県）ごとの人数→棒
+        $users_each_prefectures = User::select(DB::raw('count(prefecture_id) as user_count'), 'prefecture_id')
+            ->groupBy('prefecture_id')
+            ->get()
+            ->toArray();
+        $users_each_prefectures = array_column($users_each_prefectures, 'user_count', 'prefecture_id');
+
+        // 人数0の都道府県はキーが存在しないのでデータを足す
+        $data['prefectures'] = [];
+        for ($i = 0; $i < Prefecture::all()->count(); $i++) {
+            if (isset($users_each_prefectures[$i+1])) {
+                $data['prefectures']['counts'][$i] = $users_each_prefectures[$i+1];
+            } else {
+                $data['prefectures']['counts'][$i] = 0;
+            }
+        }
+        $data['prefectures']['labels'] = array_column(Prefecture::select('name')->get()->toArray(), 'name');
+
+        // 年数ごとの登録期間→棒
+
+        return $data;
     }
 }

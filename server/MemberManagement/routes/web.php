@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Models\Gender;
 use App\Models\Prefecture;
+use App\Models\User;
 
 /**
  * 会員用ページ
@@ -57,3 +58,6 @@ Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manag
 Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender::all(), 'prefectures' => Prefecture::all()]);
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');
 Route::post('/manager/coupon/store', 'CouponController@store');
+
+// 会員一覧
+Route::view('/manager/analysis', 'manager/analysis', ['data' => User::getChartData()]);
