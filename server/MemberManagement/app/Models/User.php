@@ -70,25 +70,23 @@ class User extends Model
     {
         $data = [];
         $data['alluser'] = User::all()->count();
-
-        // このへんのグラフ用値の取得をModelに書くとしたらUserかな
-
-        // 性別ごとの人数→円
-        $data['genders'] = User::select('gender_id', DB::raw('count(gender_id) as user_count'))
+        // 性別ごとの人数
+        $data['genders']['counts']  = User::select('gender_id', DB::raw('count(gender_id) as user_count'))
             ->groupBy('gender_id')
             ->get()
             ->toArray();
-        // $data['genders'] = array_column($data['genders'], 'user_count', 'gender_id');
+        $data['genders']['counts'] = array_column($data['genders']['counts'], 'user_count');
+        $data['genders']['labels'] = array_column(Gender::select('name')->get()->toArray(), 'name');
 
-        // 住所（都道府県）ごとの人数→棒
+        // 住所（都道府県）ごとの人数
         $users_each_prefectures = User::select(DB::raw('count(prefecture_id) as user_count'), 'prefecture_id')
             ->groupBy('prefecture_id')
             ->get()
             ->toArray();
         $users_each_prefectures = array_column($users_each_prefectures, 'user_count', 'prefecture_id');
+        $data['prefectures']['labels'] = array_column(Prefecture::select('name')->get()->toArray(), 'name');
 
         // 人数0の都道府県はキーが存在しないのでデータを足す
-        $data['prefectures'] = [];
         for ($i = 0; $i < Prefecture::all()->count(); $i++) {
             if (isset($users_each_prefectures[$i+1])) {
                 $data['prefectures']['counts'][$i] = $users_each_prefectures[$i+1];
@@ -96,7 +94,6 @@ class User extends Model
                 $data['prefectures']['counts'][$i] = 0;
             }
         }
-        $data['prefectures']['labels'] = array_column(Prefecture::select('name')->get()->toArray(), 'name');
 
         // 年数ごとの登録期間→棒
 

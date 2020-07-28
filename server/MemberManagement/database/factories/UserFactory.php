@@ -24,6 +24,9 @@ $factory->define(User::class, function (Faker $faker) {
     $max = strtotime($end);
     $date = date('Y-m-d H:i:s', rand($min, $max));
 
+    // シード値設定
+    $faker->seed(1234);
+
     return [
         'name1' => $faker->lastName,
         'name2' => $faker->firstName,

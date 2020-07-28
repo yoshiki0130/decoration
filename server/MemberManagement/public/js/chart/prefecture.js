@@ -1,10 +1,12 @@
 // 都道府県ごとの会員分布
-const usersEachPrefecturesChart = (canvas, data) => {
-  const prefectureChart = new Chart(canvas, {
+const prefecturesHistogram = (canvas, data) => {
+  const chart = new Chart(canvas, {
     type: 'bar',
     data: {
       labels: data['labels'],
       datasets: [{
+        barPercentage: 1.0,
+        categoryPercentage: 1.0,
         data: data['counts'],
       }]
     },
@@ -33,7 +35,7 @@ const usersEachPrefecturesChart = (canvas, data) => {
       },
       tooltips: {
         callbacks: {
-          label: function(tooltipItem, data) {
+          label: (tooltipItem, data) => {
             return tooltipItem.yLabel + '人';
           }
         }
