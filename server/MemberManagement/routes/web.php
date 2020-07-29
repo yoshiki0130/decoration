@@ -22,7 +22,7 @@ Route::post('/user/{mode}/confirm', 'UserController@confirm')->where('mode', 'cr
 Route::post('/user/{mode}/store', 'UserController@store')->where('mode', 'create|edit');
 
 // マイページ
-Route::view('/user/my', 'user/my');
+Route::view('/user/top', 'user/my');
 // 退会（削除）
 Route::view('/user/unscribe', 'user/unscribe');
 Route::get('/user/unscribe/done', 'UserController@delete');

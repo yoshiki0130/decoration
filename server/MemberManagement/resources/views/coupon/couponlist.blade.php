@@ -34,6 +34,6 @@
       </table>
     </div>
   </div>
-  <a href="/manager/top" class="btn btn-secondary">戻る</a>
+  <a href="/{{ $mode }}/top" class="btn btn-secondary">戻る</a>
 
 @stop
