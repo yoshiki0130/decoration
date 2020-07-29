@@ -22,7 +22,7 @@ Route::post('/user/{mode}/confirm', 'UserController@confirm')->where('mode', 'cr
 Route::post('/user/{mode}/store', 'UserController@store')->where('mode', 'create|edit');
 
 // マイページ
-Route::view('/user/my', 'user/my');
+Route::view('/user/top', 'user/my');
 // 退会（削除）
 Route::view('/user/unscribe', 'user/unscribe');
 Route::get('/user/unscribe/done', 'UserController@delete');
@@ -54,6 +54,12 @@ Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('i
 
 // クーポン一覧
 Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manager');
+// クーポン詳細
+Route::get('/{mode}/coupon/{id}', 'CouponController@detail')
+  ->where([
+    'mode' => 'user|manager',
+    'id' => '^[0-9]+$'
+  ]);
 // クーポン作成
 Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender::all(), 'prefectures' => Prefecture::all()]);
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');

@@ -54,11 +54,6 @@ class User extends Model
 
         $userlist = $query->get();
 
-        foreach ($userlist as $user) {
-            $user['gender_name'] = $user->gender->name;
-            $user['prefecture_name'] = $user->prefecture->name;
-        }
-
         return compact('userlist', 'searchCriteria');
     }
 

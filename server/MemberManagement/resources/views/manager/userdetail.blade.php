@@ -22,11 +22,11 @@
     </tr>
     <tr>
       <th>性別</th>
-      <td>{{ $user['gender_name'] }}</td>
+      <td>{{ $user->gender->name }}</td>
     </tr>
     <tr>
       <th>住所</th>
-      <td>{{ $user['prefecture_name'] }}</td>
+      <td>{{ $user->prefecture->name }}</td>
     </tr>
     <tr>
       <th>登録日</th>
@@ -34,6 +34,6 @@
     </tr>
   </table>
   <hr>
-  <button onclick="history.back()" class="btn btn-secondary">一覧へ戻る</button>
+  <button onclick="history.back()" class="btn btn-secondary">戻る</button>
 </div>
 @stop

@@ -17,7 +17,7 @@ class CouponController extends Controller
             $coupon = Coupon::all();
 
             foreach ($coupon as $item) {
-                $item['distributuion_count'] = count($item->users);
+                $item['distributuion_count'] = $item->users->count();
             }
         } elseif ($mode === 'user') {
             $coupon = User::find(session('id'))->coupons;
@@ -32,13 +32,42 @@ class CouponController extends Controller
     }
 
     /**
+     * クーポン詳細
+     */
+    public function detail($mode, $id)
+    {
+        if ($mode === 'manager') {
+            $coupon = Coupon::find($id);
+            $userids = $coupon->users->pluck('id');
+
+            return view('coupon/detail')->with([
+                'mode' => $mode,
+                'data' => $coupon,
+                'userlist' => User::find($userids)
+            ]);
+        } elseif ($mode === 'user') {
+            // ログイン中の会員に紐付いたクーポンしか見れない（URL直打ち対策）
+            // 未実装
+            $coupon = Coupon::find($id);
+
+            return view('coupon/detail')->with([
+                'mode' => $mode,
+                'data' => $coupon,
+            ]);
+        } else {
+            // 
+        }
+
+    }
+
+    /**
      * クーポン作成確認
      */
     public function confirm(Request $request)
     {
         $searchResult = User::search($request);
         return view('coupon/confirm')->with([
-            'input'=> $request->all(),
+            'input' => $request->all(),
             'userlist' => $searchResult['userlist'],
         ]);
     }

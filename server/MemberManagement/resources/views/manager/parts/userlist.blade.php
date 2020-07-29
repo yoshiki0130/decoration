@@ -1,7 +1,7 @@
 @if (isset($userlist) && count($userlist) > 0)
 <table class="table">
   <tr>
-    <th>ユーザ名</th>
+    <th>会員名</th>
     <th>性別</th>
     <th>住所</th>
     <th>登録日</th>
@@ -14,8 +14,8 @@
       </a>
       <input type="hidden" name="user_id[]" value="{{ $user['id'] }}">
     </td>
-    <td>{{ $user['gender_name'] }}</td>
-    <td>{{ $user['prefecture_name'] }}</td>
+    <td>{{ $user->gender->name }}</td>
+    <td>{{ $user->prefecture->name }}</td>
     <td>{{ date('Y/m/d', strtotime($user['created_at'])) }}</td>
   </tr>
   @endforeach

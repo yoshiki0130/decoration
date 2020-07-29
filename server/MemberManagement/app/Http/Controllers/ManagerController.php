@@ -30,9 +30,6 @@ class ManagerController extends Controller
     {
         $user = User::find($id);
 
-        $user['gender_name'] = $user->gender->name;
-        $user['prefecture_name'] = $user->prefecture->name;
-
         return view('manager/userdetail')->with('user', $user);
     }
 }
