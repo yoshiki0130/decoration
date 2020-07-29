@@ -110,7 +110,7 @@
     <a href="/" class="btn btn-secondary">登録をやめる</a>
 @else
     <button type="submit" class="btn btn-primary">変更</button>
-    <a href="/user/my" class="btn btn-secondary">マイページに戻る</a>
+    <a href="/user/top" class="btn btn-secondary">マイページに戻る</a>
 @endif
   </form>
 </div>

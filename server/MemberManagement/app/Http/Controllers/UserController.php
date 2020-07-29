@@ -34,7 +34,7 @@ class UserController extends Controller
                 'name' => $user_record->name1 . $user_record->name2
             ]);
 
-            return redirect('user/my');
+            return redirect('user/top');
         } catch (Exception $e) {
             dump($e);
             return;
@@ -149,7 +149,6 @@ class UserController extends Controller
                 $user = new User;
             }
 
-            $user->user_id = $request->user_id;
             $user->name1 = $request->name1;
             $user->name2 = $request->name2;
             $user->kana1 = $request->kana1;
@@ -161,7 +160,7 @@ class UserController extends Controller
             $user->save();
 
             if ($mode === 'edit') {
-                return redirect('user/my')->with('message', '登録情報を変更しました');
+                return redirect('user/top')->with('message', '登録情報を変更しました');
             } else {
                 return view('user/registration/store');
             }
