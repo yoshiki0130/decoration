@@ -1,7 +1,7 @@
 @if (isset($userlist) && count($userlist) > 0)
 <table class="table">
   <tr>
-    <th>ユーザ名</th>
+    <th>会員名</th>
     <th>性別</th>
     <th>住所</th>
     <th>登録日</th>

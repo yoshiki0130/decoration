@@ -27,7 +27,7 @@
         <tr>
           <th>クーポンを配布する会員</th>
           <td>
-            @include('manager/user/search')
+            @include('manager/parts/usersearch')
           </td>
         </tr>
       </table>

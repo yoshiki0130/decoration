@@ -54,6 +54,12 @@ Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('i
 
 // クーポン一覧
 Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manager');
+// クーポン詳細
+Route::get('/{mode}/coupon/{id}', 'CouponController@detail')
+  ->where([
+    'mode' => 'user|manager',
+    'id' => '^[0-9]+$'
+  ]);
 // クーポン作成
 Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender::all(), 'prefectures' => Prefecture::all()]);
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');

@@ -34,6 +34,6 @@
     </tr>
   </table>
   <hr>
-  <button onclick="history.back()" class="btn btn-secondary">一覧へ戻る</button>
+  <button onclick="history.back()" class="btn btn-secondary">戻る</button>
 </div>
 @stop
