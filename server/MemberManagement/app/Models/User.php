@@ -73,10 +73,8 @@ class User extends Model
         // 性別ごとの人数
         $data['genders']['counts']  = User::select('gender_id', DB::raw('count(gender_id) as user_count'))
             ->groupBy('gender_id')
-            ->get()
-            ->toArray();
-        $data['genders']['counts'] = array_column($data['genders']['counts'], 'user_count');
-        $data['genders']['labels'] = array_column(Gender::select('name')->get()->toArray(), 'name');
+            ->get()->pluck('user_count');
+        $data['genders']['labels'] = Gender::select('name')->get()->pluck('name');
 
         // 住所（都道府県）ごとの人数
         $users_each_prefectures = User::select(DB::raw('count(prefecture_id) as user_count'), 'prefecture_id')
@@ -84,7 +82,7 @@ class User extends Model
             ->get()
             ->toArray();
         $users_each_prefectures = array_column($users_each_prefectures, 'user_count', 'prefecture_id');
-        $data['prefectures']['labels'] = array_column(Prefecture::select('name')->get()->toArray(), 'name');
+        $data['prefectures']['labels'] = Prefecture::select('name')->get()->pluck('name');
 
         // 人数0の都道府県はキーが存在しないのでデータを足す
         for ($i = 0; $i < Prefecture::all()->count(); $i++) {
