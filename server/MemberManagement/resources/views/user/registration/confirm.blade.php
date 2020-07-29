@@ -27,13 +27,6 @@
         </td>
       </tr> 
       <tr>
-        <th>会員ID</th>
-        <td>
-          {{ $input['user_id'] }}
-          <input type="hidden" name="user_id" value="{{ $input['user_id'] }}">
-        </td>
-      </tr>
-      <tr>
         <th>パスワード</th>
         <td>
           {{ $input['password'] }}

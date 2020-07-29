@@ -12,7 +12,7 @@
     <a href="javascript:void(0)" onclick="history.back()" class="btn btn-secondary">内容を修正する</a>
     <hr>
   </form>
-  <a href="user/my" class="btn btn-secondary">マイページに戻る</a>
+  <a href="user/top" class="btn btn-secondary">マイページに戻る</a>
 
 </div>
 @stop

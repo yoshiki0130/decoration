@@ -10,6 +10,6 @@
     <button type="submit" class="btn btn-primary">送信</button>
     <hr>
   </form>
-  <a href="/user/my" class="btn btn-secondary">マイページに戻る</a>
+  <a href="/user/top" class="btn btn-secondary">マイページに戻る</a>
 </div>
 @stop

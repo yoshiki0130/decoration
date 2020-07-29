@@ -42,17 +42,6 @@
         </td>
       </tr>
       <tr>
-        <th>希望する会員ID</th>
-        <td>
-          <input type="text" name="user_id"
-          @if (isset($record['user_id']))
-              value="{{ $record['user_id'] }}"
-          @endif
-          >
-          半角英数字とアンダーバー(_)、ハイフン(-)
-        </td>
-      </tr>
-      <tr>
         <th>パスワード</th>
         <td>
           {{-- 2回入力ではなく表示切り替え実装したい --}}
@@ -121,7 +110,7 @@
     <a href="/" class="btn btn-secondary">登録をやめる</a>
 @else
     <button type="submit" class="btn btn-primary">変更</button>
-    <a href="/user/my" class="btn btn-secondary">マイページに戻る</a>
+    <a href="/user/top" class="btn btn-secondary">マイページに戻る</a>
 @endif
   </form>
 </div>
