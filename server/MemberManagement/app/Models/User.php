@@ -32,7 +32,7 @@ class User extends Model
      */
     public static function search(Request $request)
     {
-        $query = User::query();
+        $query = User::query()->whereNull('deleted_at');
         $searchCriteria = $request->only([
             'name1', 'name2', 'gender_id', 'prefecture_id', 'min', 'max'
         ]);
@@ -64,10 +64,11 @@ class User extends Model
     public static function getChartData()
     {
         $data = [];
-        $data['alluser'] = User::all()->count();
+        $data['alluser'] = User::whereNull('deleted_at')->count();
         // 性別ごとの人数
         $data['genders']['labels'] = Gender::select('name')->get()->pluck('name');
         $data['genders']['counts']  = User::select('gender_id', DB::raw('count(gender_id) as user_count'))
+            ->whereNull('deleted_at')
             ->groupBy('gender_id')
             ->get()->pluck('user_count');
 
