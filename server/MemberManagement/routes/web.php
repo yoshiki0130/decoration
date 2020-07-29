@@ -51,6 +51,9 @@ Route::view('/manager/top', 'manager/top');
 Route::get('/manager/userlist', 'ManagerController@userlist');
 // 会員詳細
 Route::get('/manager/userdetail/{id}', 'ManagerController@userdetail')->where('id', '^[0-9]+$');
+// 会員削除
+Route::get('/manager/userdelete/{id}', 'ManagerController@userdelete')->where('id', '^[0-9]+$');
+Route::get('/manager/userdelete/done/{id}', 'ManagerController@deleteExecute')->where('id', '^[0-9]+$');
 
 // クーポン一覧
 Route::get('/{mode}/coupon', 'CouponController@list')->where('mode', 'user|manager');
@@ -65,5 +68,5 @@ Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');
 Route::post('/manager/coupon/store', 'CouponController@store');
 
-// 会員一覧
+// 会員分析
 Route::view('/manager/analysis', 'manager/analysis', ['data' => User::getChartData()]);

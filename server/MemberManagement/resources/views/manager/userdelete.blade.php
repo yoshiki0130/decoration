@@ -1,7 +1,7 @@
-@extends('layout/manager')
+@extends('layout/user')
 @section('content')
 <div>
-  <h1>会員詳細</h1>
+  <h1>会員削除</h1>
   <table>
     <tr>
       <th>ID</th>
@@ -36,8 +36,10 @@
       <td>{{ date('Y/m/d', strtotime($user['created_at'])) }}</td>
     </tr>
   </table>
+
+  <p>本当にこの会員を削除しますか？</p>
   <hr>
-  <button onclick="history.back()" class="btn btn-secondary">戻る</button>
-  <a href="/manager/userdelete/{{ $user['id'] }}" class="btn btn-danger">削除</a>
+  <a href="javascript:void(0)" onclick="history.back()" class="btn btn-secondary">戻る</a>
+  <a href="/manager/userdelete/done/{{ $user['id'] }}" class="btn btn-danger">削除する</a>
 </div>
 @stop

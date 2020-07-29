@@ -32,4 +32,25 @@ class ManagerController extends Controller
 
         return view('manager/userdetail')->with('user', $user);
     }
+
+    public function userdelete($id)
+    {
+        $user = User::find($id);
+
+        return view('manager/userdelete')->with('user', $user);
+    }
+
+    public function deleteExecute($id)
+    {
+        try {
+            $user = User::find($id);
+            $user->deleted_at = date('Y-m-d H:i:s', time());
+            $user->save();
+            
+            return redirect('/manager/userlist')->with('message', '会員を削除しました');
+        } catch (\Throwable $th) {
+            dump($th);
+            return;
+        }
+    }
 }
