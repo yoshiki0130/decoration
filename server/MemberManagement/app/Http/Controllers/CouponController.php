@@ -13,22 +13,27 @@ class CouponController extends Controller
      */
     public function list($mode)
     {
-        if ($mode === 'manager') {
-            $coupon = Coupon::all();
+        try {
+            if ($mode === 'manager') {
+                $coupon = Coupon::all();
 
-            foreach ($coupon as $item) {
-                $item['distributuion_count'] = $item->users->count();
+                foreach ($coupon as $item) {
+                    $item['distributuion_count'] = $item->users->count();
+                }
+            } elseif ($mode === 'user') {
+                $coupon = User::find(session('id'))->coupons;
+            } else {
+                // 
             }
-        } elseif ($mode === 'user') {
-            $coupon = User::find(session('id'))->coupons;
-        } else {
-            // 
-        }
 
-        return view('coupon/couponlist')->with([
-            'mode' => $mode,
-            'data' => $coupon,
-        ]);
+            return view('coupon/couponlist')->with([
+                'mode' => $mode,
+                'data' => $coupon,
+            ]);
+        } catch (\Throwable $th) {
+            dump($th);
+            return;
+        }
     }
 
     /**
@@ -36,28 +41,32 @@ class CouponController extends Controller
      */
     public function detail($mode, $id)
     {
-        if ($mode === 'manager') {
-            $coupon = Coupon::find($id);
-            $userids = $coupon->users->pluck('id');
+        try {
+            if ($mode === 'manager') {
+                $coupon = Coupon::find($id);
+                $userids = $coupon->users->pluck('id');
 
-            return view('coupon/detail')->with([
-                'mode' => $mode,
-                'data' => $coupon,
-                'userlist' => User::find($userids)
-            ]);
-        } elseif ($mode === 'user') {
-            // ログイン中の会員に紐付いたクーポンしか見れない（URL直打ち対策）
-            // 未実装
-            $coupon = Coupon::find($id);
+                return view('coupon/detail')->with([
+                    'mode' => $mode,
+                    'data' => $coupon,
+                    'userlist' => User::find($userids)
+                ]);
+            } elseif ($mode === 'user') {
+                // ログイン中の会員に紐付いたクーポンしか見れない（URL直打ち対策）
+                // 未実装
+                $coupon = Coupon::find($id);
 
-            return view('coupon/detail')->with([
-                'mode' => $mode,
-                'data' => $coupon,
-            ]);
-        } else {
-            // 
+                return view('coupon/detail')->with([
+                    'mode' => $mode,
+                    'data' => $coupon,
+                ]);
+            } else {
+                // 
+            }
+        } catch (\Throwable $th) {
+            dump($th);
+            return;
         }
-
     }
 
     /**
@@ -65,11 +74,17 @@ class CouponController extends Controller
      */
     public function confirm(Request $request)
     {
-        $searchResult = User::search($request);
-        return view('coupon/confirm')->with([
-            'input' => $request->all(),
-            'userlist' => $searchResult['userlist'],
-        ]);
+        try {
+            $searchResult = User::search($request);
+
+            return view('coupon/confirm')->with([
+                'input' => $request->all(),
+                'userlist' => $searchResult['userlist'],
+            ]);
+        } catch (\Throwable $th) {
+            dump($th);
+            return;
+        }
     }
 
     /**
