@@ -63,6 +63,8 @@ Route::get('/{mode}/coupon/{id}', 'CouponController@detail')
     'mode' => 'user|manager',
     'id' => '^[0-9]+$'
   ]);
+// クーポン削除
+Route::post('/manager/coupon/delete', 'CouponController@delete');
 // クーポン作成
 Route::view('/manager/coupon/registration', 'coupon/input', ['genders' => Gender::all(), 'prefectures' => Prefecture::all()]);
 Route::post('/manager/coupon/confirm', 'CouponController@confirm');

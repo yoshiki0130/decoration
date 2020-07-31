@@ -23,12 +23,11 @@ $factory->define(User::class, function (Faker $faker) {
     $min = strtotime($start);
     $max = strtotime($end);
     $date = date('Y-m-d H:i:s', rand($min, $max));
-
     return [
         'name1' => $faker->lastName,
         'name2' => $faker->firstName,
-        'kana1' => 'カナ',
-        'kana2' => 'カナ',
+        'kana1' => $faker->lastKanaName,
+        'kana2' => $faker->firstKanaName,
         'gender_id' => random_int(1, 2),
         'password' => 'test',
         'email' => $faker->unique()->safeEmail,

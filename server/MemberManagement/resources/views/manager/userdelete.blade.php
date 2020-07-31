@@ -1,4 +1,4 @@
-@extends('layout/user')
+@extends('layout/manager')
 @section('content')
 <div>
   <h1>会員削除</h1>

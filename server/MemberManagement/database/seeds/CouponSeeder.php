@@ -18,8 +18,8 @@ class CouponSeeder extends Seeder
         factory(Coupon::class, 10)->create()
             ->each(function ($coupon) use ($users) {
                 $coupon->users()->sync(
-                    // couponに3～6個のuser（DBに登録されている）を紐付け
-                    $users->random(rand(3, 6))->pluck('id')->toArray()
+                    // couponに5～15個のuser（DBに登録されている）を紐付け
+                    $users->random(rand(64, 128))->pluck('id')->toArray()
                 );
             });
     }
