@@ -30,7 +30,7 @@
         <tr>
           <th>クーポンを配布する会員</th>
           <td>
-            @include('manager/parts/userlist')
+            @include('layout/parts/userlist')
           </td>
         </tr>
       </table>

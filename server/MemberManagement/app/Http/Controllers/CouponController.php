@@ -115,10 +115,10 @@ class CouponController extends Controller
             $coupon->deleted_at = date('Y-m-d H:i:s', time());
             $coupon->save();
             
-            // userとの紐付けをすべて切り離す
+            // 会員との紐付けを削除
             $coupon->users()->detach();
 
-            return redirect('/manager/coupon')->with('message', '会員を削除しました');
+            return redirect('/manager/coupon')->with('message', 'クーポンを削除しました');
         } catch (\Throwable $th) {
             dump($th);
             return;
