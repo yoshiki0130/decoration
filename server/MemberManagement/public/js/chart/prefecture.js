@@ -23,7 +23,12 @@ const prefecturesHistogram = (canvas, data) => {
         yAxes: [{
           ticks: {
             // y軸は0開始
-            beginAtZero: true
+            beginAtZero: true,
+            userCallback: function(label, index, labels) {
+              if (Math.floor(label) === label) {
+                return label;
+              }
+            }
           }
         }],
         xAxes: [{
