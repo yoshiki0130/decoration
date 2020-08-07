@@ -37,7 +37,21 @@ Route::view('/user/reissue', 'user/reissue');
 Route::post('/user/reissue/done', 'UserController@reissue');
 
 // 日記機能
-
+Route::get('/user/diary', 'DiaryController@top');
+// 日記詳細
+Route::post('/user/diary/details', 'DiaryController@details');
+// 日記作成画面
+Route::view('/user/diary/create', 'diary/create');
+// 日記作成登録
+Route::post('/user/diary/create_diary', 'DiaryController@create');
+// 日記編集画面
+Route::post('/user/diary/edit', 'DiaryController@edit');
+// 日記編集登録
+Route::post('/user/diary/edit_diary', 'DiaryController@edit_diary');
+// ユーザープロフィール
+Route::post('/user/diary/profile', 'DiaryController@profile');
+// いいね
+Route::post('/user/diary/good', 'DiaryController@good');
 
 /**
  * 管理者用ページ
