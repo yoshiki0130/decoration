@@ -1,5 +1,6 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
+@section('title', '日記詳細')
 <div>
   <h1>日記編集</h1>
   <div>
@@ -13,10 +14,10 @@
   <label><input type="radio" value="0" name="edit_release" {{$release->release == 0 ? 'checked': null }}>公開</label><br>
   <label><input type="radio" value="1" name="edit_release" {{$release->release == 1 ? 'checked': null }}>非公開</label><br>
   <input type="hidden" name="edit_id" value="<? echo $data['edit_id'] ?>">
-  <button type="submit" class="btn btn-primary">編集</button>
+  <button type="submit" class="btn btn-primary">編集完了</button>
   </form>
   </div>
 </div>
-<a href="javascript:void(0)" onclick="history.back()" class="btn btn-secondary">日記詳細に戻る</a>
+<a href="/user/top" class="btn btn-secondary">日記詳細に戻る</a>
 
 @stop

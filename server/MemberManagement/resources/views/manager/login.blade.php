@@ -1,5 +1,6 @@
-@extends('layout/manager')
+@extends('layout/layout')
 @section('content')
+@section('title', 'ログイン')
 <div>
   <h1>ログイン</h1>
   <form action="/login" method="post">

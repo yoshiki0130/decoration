@@ -1,10 +1,12 @@
-@extends('layout/user')
+@extends('layout/layout')
 @section('content')
 <div>
 @if ($mode === 'edit')
+@section('title', '会員情報変更')
   <h1>会員情報変更</h1>
   <form action="/user/edit/store" method="post">
 @else
+@section('title', '新規会員登録')
   <h1>新規会員登録</h1>
   <form action="/user/create/store" method="post">
 @endif

@@ -1,5 +1,6 @@
 @extends('layout/manager')
 @section('content')
+@section('title', '会員詳細')
   <div>
     <h1>会員詳細</h1>
     <table>

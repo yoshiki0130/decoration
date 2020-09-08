@@ -1,4 +1,5 @@
 @extends('layout/user')
+@section('title', 'マイページ')
 @section('content')
 <div>
   <h1>マイページ</h1>

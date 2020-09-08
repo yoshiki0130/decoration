@@ -1,5 +1,6 @@
 @extends('layout/manager')
 @section('content')
+@section('title', 'クーポン作成')
 <div>
   <h1>クーポン作成</h1>
   <div>

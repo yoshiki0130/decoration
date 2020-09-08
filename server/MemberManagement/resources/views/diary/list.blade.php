@@ -1,5 +1,6 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
+@section('title', '日記一覧')
 <div>
   <h1>日記一覧</h1>
   <div>
@@ -24,6 +25,6 @@
     </table>
   </div>
 </div>
-<a href="javascript:void(0)" onclick="history.back()" class="btn btn-secondary">マイページに戻る</a>
+<a href="/user/top" class="btn btn-secondary">マイページに戻る</a>
 
 @stop

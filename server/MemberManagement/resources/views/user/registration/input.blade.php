@@ -1,10 +1,12 @@
-@extends('layout/user')
+@extends('layout/layout')
 @section('content')
 <div>
 @if (isset($record))
   <h1>登録情報変更</h1>
+@section('title', '登録情報変更')
   <form action="/user/edit/confirm" method="post">
 @else
+@section('title', '新規会員登録')
   <h1>新規会員登録</h1>
   <form action="/user/create/confirm" method="post">
 @endif

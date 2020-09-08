@@ -1,5 +1,6 @@
 @extends('layout/user')
 @section('content')
+@section('title', 'お問い合わせ')
 <div>
   <h1>お問い合わせ</h1>
   <form action="/user/contact/confirm" method="post">

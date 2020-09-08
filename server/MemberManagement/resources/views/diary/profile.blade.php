@@ -1,5 +1,6 @@
-@extends('layout/layout')
+@extends('layout/user')
 @section('content')
+@section('title', 'ユーザープロフィール')
 <div>
   <h1>ユーザープロフィール</h1>
   <div>

@@ -1,5 +1,6 @@
 @extends('layout/manager')
 @section('content')
+@section('title', 'クーポン詳細')
   <div>
     <h1>クーポン詳細</h1>
     <a href="javascript:void(0)" onclick="history.back()" class="btn btn-secondary">戻る</a>

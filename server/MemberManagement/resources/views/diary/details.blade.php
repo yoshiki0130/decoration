@@ -1,14 +1,15 @@
-@extends('layout/layout')
+@extends('layout/user')
+@section('title', '日記詳細')
 @section('content')
 <div>
-  <h1>日記詳細</h1>
-  <div>
-  <p>タイトル：<br>
-  <? echo $data->title ?></p>
-  <p>本文　　：<br>
-  <? echo $data->diary ?></p>
-  </div>
-</div>
+  <p class="text-secondary">日記詳細</p>
+  <!-- <p>タイトル：<br> -->
+    <h1>
+    <? echo $data->title ?></p>
+    </h1>
+  <!-- <p>本文　　：<br> -->
+    <? echo $data->diary ?>
+    </p>
 
 @if (session('name') == $name || $evaluation)
 いいね：<? echo $count; ?>
@@ -17,7 +18,7 @@
 @csrf
 <input type="hidden" name="good_user" value="{{ session('id') }}">
 <input type="hidden" name="good_diary" value="<? echo $data->id; ?>">
-<a href="javascript:void(0)" onclick="document.good.submit()">いいね：<? echo $count; ?></a>
+<a href="javascript:void(0)" onclick="document.good.submit()" class="btn btn-primary btn-sm">いいね：<? echo $count; ?></a>
 </form>
 @endif
 

@@ -1,5 +1,6 @@
 @extends('layout/manager')
 @section('content')
+@section('title', 'トップページ')
 <div>
   <h1>機能一覧</h1>
   <ul>

@@ -1,5 +1,6 @@
 @extends('layout/user')
 @section('content')
+@section('title', 'ログアウト')
 <div>
   <p>ログアウトしました</p>
 </div>

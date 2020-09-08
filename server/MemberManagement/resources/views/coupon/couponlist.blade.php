@@ -1,5 +1,6 @@
 @extends('layout/'.$mode)
 @section('content')
+@section('title', 'クーポン管理')
   <div>
     <h1>クーポン管理</h1>
     @if($mode === 'manager')
